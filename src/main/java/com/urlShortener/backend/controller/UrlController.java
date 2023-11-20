@@ -5,20 +5,21 @@ import com.urlShortener.backend.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("api/v1/url/shortener")
+@RequestMapping("api/v1/shortener")
 public class UrlController {
 
     @Autowired
     private UrlService urlService;
 
-    @GetMapping
-    public String getOriginUrl(@RequestParam String url){
+    @GetMapping("url/{url}")
+    public String getOriginUrl(@PathVariable String url){
         return urlService.getOriginUrl(url);
     }
 
     @PostMapping
-    public Url generateShortUrl(@RequestParam String url){
+    public Url generateShortUrl(@RequestBody String url){
         return urlService.getShortUrl(url);
     }
 }
