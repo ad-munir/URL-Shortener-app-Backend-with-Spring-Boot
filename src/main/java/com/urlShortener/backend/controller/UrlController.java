@@ -1,26 +1,24 @@
 package com.urlShortener.backend.controller;
 
+import com.urlShortener.backend.entity.Url;
 import com.urlShortener.backend.service.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/url/shortner")
+@RequestMapping("api/v1/url/shortener")
 public class UrlController {
 
     @Autowired
     private UrlService urlService;
 
     @GetMapping
-    public String getOriginUrl(String url){
+    public String getOriginUrl(@RequestParam String url){
         return urlService.getOriginUrl(url);
     }
 
     @PostMapping
-    public String generateShortUrl(String url){
-        return urlService.generateShortUrl(url);
+    public Url generateShortUrl(@RequestParam String url){
+        return urlService.getShortUrl(url);
     }
 }
